@@ -219,12 +219,10 @@
             var move2 = [-1, +1, +1, -1, +1, -1, -1, +1];
             var cursor = [0, 0, 0];
             var gLastCursor = cursor;
-<<<<<<< HEAD
-            var visual_and_numerical_grid = {};
-=======
+
             var grid = {};
             var _3cellstate = {};
->>>>>>> origin/gh-pages
+
             var isRunning = false;
             var direction = "forward";
             var lasthash = "";
@@ -361,10 +359,9 @@
                 var geometry = new THREE.Geometry();
                 geometry.vertices.push( new THREE.Vertex( new THREE.Vector3( axisMin * 50, 0, 0 ) ) );
                 geometry.vertices.push( new THREE.Vertex( new THREE.Vector3( (axisMax+1) * 50, 0, 0 ) ) );
-<<<<<<< HEAD
-=======
+
                 
->>>>>>> origin/gh-pages
+
                 linesMaterial = new THREE.LineColorMaterial( 0x000000, 0.2 );
                 
                 
@@ -587,11 +584,11 @@
                     var cells = [];
                     
                     //what is "grid"
-                    for(var key in visual_and_numerical_grid) {
+                    for(var key in grid) {
                         var xyz = eval('[' + key + ']')
                         
                         // this is how the cells array works--has a bunch of arrays with 2 objects [location, grid]
-                        cells.push([xyz, visual_and_numerical_grid[key]]);
+                        cells.push([xyz, grid[key]]);
                     }
                     
                     
@@ -613,15 +610,10 @@
                     ///////////////
                     
                     
-                    var moves = []
-<<<<<<< HEAD
-                    
-                    
-                    //THIS is BusyBoxes specific
-                    //these are the only two axes we use
-=======
+                    var moves = [];
+
                     var flips = [];
->>>>>>> origin/gh-pages
+
                     var x1, x2                                          // our two axes for today
                     
                     //trueMod seems to be something to make modulus work with negative
@@ -709,7 +701,7 @@
                     if (AVG_TRAIL) {
                         avg = [0, 0, 0];
                         var len = 0;
-                        for (var key in visual_and_numerical_grid) {
+                        for (var key in grid) {
                             len++;
                             var cell;
                             eval("cell=[" + key + "]");
@@ -765,16 +757,7 @@
                         //moveCell(oldxyz, mesh, newxyz)
                         moveCell(args[0], args[1], args[2]);
                     }
-<<<<<<< HEAD
-                    
-                    
-                    
-                    /// this is where the cells are rendered!!!
-                    
-                    if (!noRender) render();
 
-                    if (direction == "forward") frame++;
-=======
 
                     for (i in flips) {
                     //    alert("flips are here" + i.toString());
@@ -788,27 +771,14 @@
                     if (direction == "forward") {
                         frame++;
                     }
->>>>>>> origin/gh-pages
+
                     updateHash(true);
                 }
             }
             //END of MainLoop
             
             
-<<<<<<< HEAD
-            
-            //This is the hairy function that gets the next move
-            //deals with whether or not the axes wrap around
-              // how will we handle this???
-              // we need different modes--support different ways
-                // --wrap around axes, not wrap around, no boundaries, etc.
-              // e.g. experiment like a gas--certain number
-              // of gliders in space, you might want a closed space
-              
-              
-            // checks whether the cell at xyz needs to move
-            // thinking of it as those cells move you            
-=======
+
 
             function getDetuschMove(xyz, x1, x2) {
                 if(x1 == null) x1 = 0;
@@ -851,7 +821,7 @@
                 return flip;
 
             }
->>>>>>> origin/gh-pages
+
             function getMove(xyz, x1, x2) {
                 if(x1 == null) x1 = 0;
                 if(x2 == null) x2 = 2;
@@ -931,10 +901,7 @@
                 delGrid(oldxyz);
                 putGrid(mesh, newxyz);
             }
-<<<<<<< HEAD
-            
-            //conceptual representation of Grid is an object with a bunch of coordinates 
-=======
+
 
                 function flipCell(xyz, mesh) {
 /*                if (CELL_TRAIL) {
@@ -992,7 +959,6 @@
             }
 
 
->>>>>>> origin/gh-pages
             // convert grid coord to 3D coord and set obj.position accordingly given vector [x,y,z]
             //all of this code is for creating a visual representation of the conceptual grid, which might be a sparse array
             function setObjPosition(obj, xyz) {
@@ -1032,9 +998,7 @@
             // grid actually has visual things
             // we could get rid of it 
             function putGrid(obj, xyz) {
-<<<<<<< HEAD
-                visual_and_numerical_grid[xyz] = obj;
-=======
+
                 grid[xyz] = obj;
                 _3cellstate[xyz] = 1;
                 //alert("set to 1");
@@ -1044,7 +1008,7 @@
                 grid[xyz] = obj;
                 _3cellstate[xyz] = -1;
                 //alert("set to -1");
->>>>>>> origin/gh-pages
+
             }
             
             
@@ -1063,12 +1027,9 @@
                         }
                     }
                 }
-                return visual_and_numerical_grid[xyz]
+                return grid[xyz]
             }
-<<<<<<< HEAD
-            function delGrid(xyz) {
-                delete visual_and_numerical_grid[xyz];
-=======
+
             function get3CellGrid(xyz) {
                 if (mode == "wrap") {
                     for (var i = 0; i < 3; i++) {
@@ -1084,7 +1045,7 @@
                 delete grid[xyz];
                 delete _3cellstate[xyz];
                 //alert("set to 0");
->>>>>>> origin/gh-pages
+
             }
             
             function toggleRunning(){
@@ -1284,26 +1245,17 @@
 
                         }
                         else {
-<<<<<<< HEAD
-                            var voxel = new THREE.Mesh( cube, new THREE.MeshColorFillMaterial( colors[ color ] ) );
-                            
+
                             //add third parameter--negative
                             //contstruct object: mesh(THREE.js), state()
-=======
-
                             var voxel = new THREE.Mesh(cube, new THREE.MeshColorFillMaterial(colors[color]));
->>>>>>> origin/gh-pages
+
                             putGrid(voxel, cursor);
                             setObjPosition(voxel, cursor);
                             voxel.overdraw = true;
                             scene.addObject(voxel);
                         }
-<<<<<<< HEAD
-                        
-=======
 
-
->>>>>>> origin/gh-pages
                         updateHash();
                         gInitialHash = lasthash;
                         gInitialFrame = frame;
@@ -1340,7 +1292,7 @@
                 }
                 var dx = event.clientX - onMouseDownPosition.x;
                 var dy = event.clientY - onMouseDownPosition.y;
-//if(DEBUG) console.log("dx, dy:", dx, dy)
+                //if(DEBUG) console.log("dx, dy:", dx, dy)
                 event.preventDefault();
                 if ( isMouseDown ) {
                     theta = - ( ( event.clientX - onMouseDownPosition.x ) * 0.5 ) + onMouseDownTheta;
@@ -1394,8 +1346,7 @@
                 brush.material[ 0 ].color.setHex( colors[ color ] ^ 0x4C000000 );
                 render();
             }
-<<<<<<< HEAD
-=======
+
             
             function setMinusBrushColor(value) {
                 minuscolor = value;
@@ -1405,7 +1356,7 @@
 
             }
 
->>>>>>> origin/gh-pages
+
             function refreshUrl(hash) {
                 //console.log("should refresh:", url);
                 var url = hash2url(hash);
@@ -1574,7 +1525,7 @@
             // Dan is using a hash but it is a quick and dirty solution. Might be something better
             function updateHash(noLink) {
                 var key, keys = [];
-                for (key in visual_and_numerical_grid) {
+                for (key in grid) {
                     keys.push(key);
                 }
                 keys.sort();
@@ -1682,12 +1633,10 @@
             }
             function clearScreen() {
                 isRunning = false;
-<<<<<<< HEAD
-                visual_and_numerical_grid = {};
-=======
+
                 grid = {};
                 _3cellstate = {};
->>>>>>> origin/gh-pages
+
                 var i = 0;
                 while ( i < scene.objects.length ) {
                     object = scene.objects[ i ];
@@ -1744,7 +1693,7 @@
                     for (i = 0; i < count; i++) {
                         var phase = -1;
                         var targPhase = i < (count * ratio - 0.5)?0:1;
-                        while ((cursor in visual_and_numerical_grid) || (phase != targPhase)) {
+                        while ((cursor in grid) || (phase != targPhase)) {
                             for (var axis = 0; axis < 3; axis++) {
                                 cursor[axis] = Math.floor(Math.random() * (axMax[axis] - axMin[axis] + 1) + axMin[axis]);
                             }
