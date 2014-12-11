@@ -209,11 +209,22 @@
             var cell_trail_a = [];
             var offs1 = [+2, +1, -1, -2, +2, +1, -1, -2];
             var offs2 = [+1, +2, +2, +1, -1, -2, -2, -1];
+            var Detuschoffs1 = [+2, +1, -1, -2, +2, +1, -1, -2];
+            var Detuschoffs2 = [+1, +2, +2, +1, -1, -2, -2, -1];
+
+            var Detuschoffs1_ = [+1, +2, -2, -1, +1, +2, -2, -1];
+            var Detuschoffs2_ = [+2, +1, +1, +2, -2, -1, -1, -2];
+
             var move1 = [+1, -1, +1, -1, +1, -1, +1, -1];
             var move2 = [-1, +1, +1, -1, +1, -1, -1, +1];
             var cursor = [0, 0, 0];
             var gLastCursor = cursor;
+<<<<<<< HEAD
             var visual_and_numerical_grid = {};
+=======
+            var grid = {};
+            var _3cellstate = {};
+>>>>>>> origin/gh-pages
             var isRunning = false;
             var direction = "forward";
             var lasthash = "";
@@ -236,7 +247,8 @@
             var container, interval,
             camera, scene, renderer,
             projector, plane, cube, linesMaterial,
-            color = 0,colors = [ 0xDF1F1F, 0xDFAF1F, 0x80DF1F, 0x1FDF50, 0x1FDFDF, 0x1F4FDF, 0x7F1FDF, 0xDF1FAF, 0xEFEFEF, 0x303030 ],
+            color = 0, colors = [0xDF1F1F, 0xDFAF1F, 0x80DF1F, 0x1FDF50, 0x1FDFDF, 0x1F4FDF, 0x7F1FDF, 0xDF1FAF, 0xEFEFEF, 0x303030],
+            minuscolor = 0,Minuscolors = [0x4e9258,0xffff00 ],
             ray, brush, objectHovered,
             isMouseDown = false, onMouseDownPosition,
             radius = 2000, theta = 0, onMouseDownTheta = 45, phi = 60, onMouseDownPhi = 60;
@@ -349,6 +361,10 @@
                 var geometry = new THREE.Geometry();
                 geometry.vertices.push( new THREE.Vertex( new THREE.Vector3( axisMin * 50, 0, 0 ) ) );
                 geometry.vertices.push( new THREE.Vertex( new THREE.Vector3( (axisMax+1) * 50, 0, 0 ) ) );
+<<<<<<< HEAD
+=======
+                
+>>>>>>> origin/gh-pages
                 linesMaterial = new THREE.LineColorMaterial( 0x000000, 0.2 );
                 
                 
@@ -598,10 +614,14 @@
                     
                     
                     var moves = []
+<<<<<<< HEAD
                     
                     
                     //THIS is BusyBoxes specific
                     //these are the only two axes we use
+=======
+                    var flips = [];
+>>>>>>> origin/gh-pages
                     var x1, x2                                          // our two axes for today
                     
                     //trueMod seems to be something to make modulus work with negative
@@ -672,6 +692,16 @@
                                     }
                                 }
                             }
+
+                            var flip = getDetuschMove(xyz, x1, x2);
+
+                   //         alert("flip value "+flip.toString());
+                            if (flip) {
+                           //   alert("flip happened");
+                                                   						flips.push([xyz, cell[1]]);
+                             }
+                               
+                            
                         }
                     }
                     
@@ -735,6 +765,7 @@
                         //moveCell(oldxyz, mesh, newxyz)
                         moveCell(args[0], args[1], args[2]);
                     }
+<<<<<<< HEAD
                     
                     
                     
@@ -743,12 +774,28 @@
                     if (!noRender) render();
 
                     if (direction == "forward") frame++;
+=======
+
+                    for (i in flips) {
+                    //    alert("flips are here" + i.toString());
+                        var args = flips[i];
+                        flipCell(args[0], args[1]);
+                    }
+
+                    if (!noRender) {
+                        render();
+                    }
+                    if (direction == "forward") {
+                        frame++;
+                    }
+>>>>>>> origin/gh-pages
                     updateHash(true);
                 }
             }
             //END of MainLoop
             
             
+<<<<<<< HEAD
             
             //This is the hairy function that gets the next move
             //deals with whether or not the axes wrap around
@@ -761,6 +808,50 @@
               
             // checks whether the cell at xyz needs to move
             // thinking of it as those cells move you            
+=======
+
+            function getDetuschMove(xyz, x1, x2) {
+                if(x1 == null) x1 = 0;
+                if(x2 == null) x2 = 2;
+                var flip = false;
+                var d1 = [0, 0, 0];
+                var d2 = [0, 0, 0];
+                //alert("Coming In");
+                for (i = 0; i < 8; i++) {
+                    d1[x1] = Detuschoffs1[i];
+                    d1[x2] = Detuschoffs2[i];
+                    d2[x1] = Detuschoffs1_[i];
+                    d2[x2] = Detuschoffs2_[i];
+                    //alert( "was here" + i.toString());
+
+                    if (getGrid([xyz[0] + d1[0], xyz[1] + d1[1], xyz[2] + d1[2]]) && getGrid([xyz[0] + d2[0], xyz[1] + d2[1], xyz[2] + d2[2]]))  {
+                if( get3CellGrid([xyz[0] + d1[0], xyz[1] + d1[1], xyz[2] + d1[2]])==1 && get3CellGrid([xyz[0] + d2[0], xyz[1] + d2[1], xyz[2] + d2[2]])==1 ) 
+                    { 
+                        var flipmv = true;
+                     
+                            flip = flipmv;
+                    }
+                }
+             }
+               /*
+                if (move && mode == "mirror") {
+                    for (var axis = 0; axis < 3; axis++) {
+                        if (xyz[axis] + move[axis] > axisMax) {
+                            move = false;
+                            break;
+                        }
+                        if (xyz[axis] + move[axis] < axisMin) {
+                            move = false;
+                            break;
+                        }
+                    }
+                }
+*/
+                //alert("Exiting");
+                return flip;
+
+            }
+>>>>>>> origin/gh-pages
             function getMove(xyz, x1, x2) {
                 if(x1 == null) x1 = 0;
                 if(x2 == null) x2 = 2;
@@ -840,8 +931,68 @@
                 delGrid(oldxyz);
                 putGrid(mesh, newxyz);
             }
+<<<<<<< HEAD
             
             //conceptual representation of Grid is an object with a bunch of coordinates 
+=======
+
+                function flipCell(xyz, mesh) {
+/*                if (CELL_TRAIL) {
+
+                    var voxel = new THREE.Mesh(cubette, new THREE.MeshColorFillMaterial(colors[4]));
+                    setObjPosition(voxel, oldxyz);
+                    voxel.overdraw = true;
+                    scene.addObject(voxel);
+                    trails.push(voxel);
+                    if (trails.length > CELL_TRAIL) {
+                        scene.removeObject(trails[0]);
+                        trails = trails.splice(1);
+                    }
+                    //console.log("trails:", trails.length)
+                }*/
+                //alert("flipping");
+
+                if(_3cellstate[xyz])
+                {
+                //  alert(" [] = "+ _3cellstate[xyz]);
+
+                  var v = _3cellstate[xyz];
+                  var mesh;
+
+                 setObjPosition(mesh, xyz);
+                 delGrid(xyz);
+                  if(v ==  -1)
+                  {
+                     setBrushPosition(xyz);
+                    var voxel = new THREE.Mesh(cube, new THREE.MeshColorFillMaterial(colors[color]));
+
+                                    scene.removeObject(mesh);
+                                    delGrid(xyz);
+                                    putGrid(voxel, xyz);
+                                    setObjPosition(voxel, xyz);
+                                    voxel.overdraw = true;
+                                    scene.addObject(voxel);
+
+                  } 
+                 else if(v == 1)
+                   {
+                            setMinusBrushPosition(xyz);
+
+                                    var voxel = new THREE.Mesh(cube, new THREE.MeshColorFillMaterial(Minuscolors[minuscolor]));
+                                    scene.removeObject(mesh);
+                                    delGrid(xyz);
+                                    putMinus1Grid(voxel, xyz);
+                                    setObjPosition(voxel, xyz);
+                                    voxel.overdraw = true;
+                                    scene.addObject(voxel);
+
+                    
+                   }
+                }
+            }
+
+
+>>>>>>> origin/gh-pages
             // convert grid coord to 3D coord and set obj.position accordingly given vector [x,y,z]
             //all of this code is for creating a visual representation of the conceptual grid, which might be a sparse array
             function setObjPosition(obj, xyz) {
@@ -853,10 +1004,26 @@
             function setBrushPosition(xyz) {
                 setObjPosition(brush, xyz);
                 if ((xyz[0] + xyz[1] + xyz[2]) % 2 == 0) {
+                
+                  
+                   // if (_3cellstate[xyz])
+                    //    if(_3cellstate[xyz]== )
+                    setMinusBrushColor(0);
                     setBrushColor(0);                    
                 }
                 else {
-                    setBrushColor(5);                    
+                    setBrushColor(5);
+                    setMinusBrushColor(1);               
+                }
+                document.getElementById("cursorpos").innerHTML = xyz[0] + "," + xyz[1] + "," + xyz[2]
+            }
+            function setMinusBrushPosition(xyz) {
+                setObjPosition(brush, xyz);
+                if ((xyz[0] + xyz[1] + xyz[2]) % 2 == 0) {
+                    setMinusBrushColor(0);
+                }
+                else {
+                    setMinusBrushColor(1);
                 }
                 document.getElementById("cursorpos").innerHTML = xyz[0] + "," + xyz[1] + "," + xyz[2]
             }
@@ -865,7 +1032,19 @@
             // grid actually has visual things
             // we could get rid of it 
             function putGrid(obj, xyz) {
+<<<<<<< HEAD
                 visual_and_numerical_grid[xyz] = obj;
+=======
+                grid[xyz] = obj;
+                _3cellstate[xyz] = 1;
+                //alert("set to 1");
+            }
+
+            function putMinus1Grid(obj, xyz) {
+                grid[xyz] = obj;
+                _3cellstate[xyz] = -1;
+                //alert("set to -1");
+>>>>>>> origin/gh-pages
             }
             
             
@@ -886,8 +1065,26 @@
                 }
                 return visual_and_numerical_grid[xyz]
             }
+<<<<<<< HEAD
             function delGrid(xyz) {
                 delete visual_and_numerical_grid[xyz];
+=======
+            function get3CellGrid(xyz) {
+                if (mode == "wrap") {
+                    for (var i = 0; i < 3; i++) {
+                        if (xyz[i] < axisMin || xyz[i] > axisMax) {
+                            xyz[i] = trueMod(xyz[i] - axisMin, (axisMax - axisMin) + 1) + axisMin;
+                        }
+                    }
+                }
+                return _3cellstate[xyz]
+            }
+
+            function delGrid(xyz) {
+                delete grid[xyz];
+                delete _3cellstate[xyz];
+                //alert("set to 0");
+>>>>>>> origin/gh-pages
             }
             
             function toggleRunning(){
@@ -1060,25 +1257,57 @@
                         event.preventDefault();
                         if (isRunning) break;
                         var obj = getGrid(cursor);
+
                         if (obj) {
-                            scene.removeObject(obj);
-                            delGrid(cursor);
+                            if (_3cellstate[cursor]) {
+                                if (_3cellstate[cursor] == -1) {
+                                    scene.removeObject(obj);
+                                    delGrid(cursor);
+
+                                }
+                            }
+
+
+                            if (_3cellstate[cursor]) {
+                                if (_3cellstate[cursor] == 1) {
+                                    var voxel = new THREE.Mesh(cube, new THREE.MeshColorFillMaterial(Minuscolors[minuscolor]));
+                                    scene.removeObject(obj);
+                                    delGrid(cursor);
+                                    putMinus1Grid(voxel, cursor);
+                                    setObjPosition(voxel, cursor);
+                                    voxel.overdraw = true;
+                                    scene.addObject(voxel);
+                                }
+                            }
+
+
+
                         }
                         else {
+<<<<<<< HEAD
                             var voxel = new THREE.Mesh( cube, new THREE.MeshColorFillMaterial( colors[ color ] ) );
                             
                             //add third parameter--negative
                             //contstruct object: mesh(THREE.js), state()
+=======
+
+                            var voxel = new THREE.Mesh(cube, new THREE.MeshColorFillMaterial(colors[color]));
+>>>>>>> origin/gh-pages
                             putGrid(voxel, cursor);
                             setObjPosition(voxel, cursor);
                             voxel.overdraw = true;
-                            scene.addObject( voxel );
+                            scene.addObject(voxel);
                         }
+<<<<<<< HEAD
                         
+=======
+
+
+>>>>>>> origin/gh-pages
                         updateHash();
                         gInitialHash = lasthash;
                         gInitialFrame = frame;
-                        render(); 
+                        render();
                         break;
                 }
             }
@@ -1165,6 +1394,18 @@
                 brush.material[ 0 ].color.setHex( colors[ color ] ^ 0x4C000000 );
                 render();
             }
+<<<<<<< HEAD
+=======
+            
+            function setMinusBrushColor(value) {
+                minuscolor = value;
+                //brush.material[0].color.setHex(Minuscolors[color] ^ 0x4C000000);
+
+                render();
+
+            }
+
+>>>>>>> origin/gh-pages
             function refreshUrl(hash) {
                 //console.log("should refresh:", url);
                 var url = hash2url(hash);
@@ -1441,7 +1682,12 @@
             }
             function clearScreen() {
                 isRunning = false;
+<<<<<<< HEAD
                 visual_and_numerical_grid = {};
+=======
+                grid = {};
+                _3cellstate = {};
+>>>>>>> origin/gh-pages
                 var i = 0;
                 while ( i < scene.objects.length ) {
                     object = scene.objects[ i ];
