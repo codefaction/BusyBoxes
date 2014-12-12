@@ -27,39 +27,10 @@
         -->
         <title>BUSY BOXES</title>
         <meta charset="utf-8">
-        <style type="text/css">
-            body {
-                font-family: Monospace;
-                font-size: 12px;
-                background-color: #f0f0f0;
-                margin: 0px;
-                overflow-x: hidden;
-            }
-            .bannerButtons {
-                opacity: 0.7;
-            }
-            .bannerButtons:hover {
-                opacity: 1.0;
-                border-color:black;
-            }
-            .goHash {
-                font-family:monospace;
-                font-size:large;
-                #color:blue;
-                #background:none;
-                border:none;
-                padding:0;
-                #border-bottom:1px solid;
-                background-color:#ddd;
-                opacity:0.7;
-            }
-            .goHash:hover {
-                background-color:white;
-            }
-        </style>
+        <link rel="stylesheet" type="text/css" href="css/application.css"></link>
     </head>
     <body style="overflow-y:hidden">
-        <div id="moodal_background" style="position:absolute;width:100%;height:100%;background-color:black;z-index:100;opacity:0.2;display:none">
+        <div id="moodal_background">
         </div>
         <div id="trail_type" style="display:none">
             Trail length:<input class="moodal_default" id="trail_length" tabindex=1 type="text" value="100"></input><br/>

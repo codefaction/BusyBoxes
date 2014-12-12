@@ -576,14 +576,21 @@
   
   
 
+  //if the condition holds, you return true, if the end of the function gets to the end then you return false
+  
 
+  //accepts location and the two planes that we are operating in
+  //whenever you have a variable that only transitions in one direction, then you can return true if it switches, or go through and then return false
   function getDetuschMove(xyz, x1, x2) {
       if(x1 == null) x1 = 0;
       if(x2 == null) x2 = 2;
-      var flip = false;
+      
+      
       var d1 = [0, 0, 0];
       var d2 = [0, 0, 0];
       //alert("Coming In");
+      
+      //consider every knight move from xyz
       for (i = 0; i < 8; i++) {
           d1[x1] = Detuschoffs1[i];
           d1[x2] = Detuschoffs2[i];
@@ -594,9 +601,8 @@
           if (getGrid([xyz[0] + d1[0], xyz[1] + d1[1], xyz[2] + d1[2]]) && getGrid([xyz[0] + d2[0], xyz[1] + d2[1], xyz[2] + d2[2]]))  {
       if( get3CellGrid([xyz[0] + d1[0], xyz[1] + d1[1], xyz[2] + d1[2]])==1 && get3CellGrid([xyz[0] + d2[0], xyz[1] + d2[1], xyz[2] + d2[2]])==1 ) 
           { 
-              var flipmv = true;
-           
-                  flip = flipmv;
+
+              return true
           }
       }
    }
@@ -614,8 +620,8 @@
           }
       }
 */
-      //alert("Exiting");
-      return flip;
+
+      return false
 
   }
 
