@@ -1,21 +1,37 @@
 #sidebar{
-  
+  background-color: rgba(0,0,0, .25);
+  border-right: solid 1px #333;
+
+  -webkit-box-shadow: 1px 1px 16px 1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 1px 1px 16px 1px rgba(0,0,0,0.75);
+  box-shadow: 1px 1px 16px 1px rgba(0,0,0,0.75);
+
   padding-top: 8px;
+  padding-right: 10px;
 
   position: absolute;
   font-size: 130%;
-
   width: 250px;
-
-  position:fixed;
   top:0;
   bottom:10;
   height: 100%;
   width: 300px;
   padding-left: 10px;
   overflow-y: scroll;
+  overflow-x: hidden;
+}
+#sidebar::-webkit-scrollbar { 
+    display: none; 
 }
 
+.hidden{
+  display:none;
+}
+
+#show_sidebar{
+  margin-left: 10px;
+  margin-top: -39px;
+}
 #sidebar_scrollable_container{
 
 }
@@ -29,7 +45,7 @@
   font-weight: bold;
 }
 #dashboard span{
-    color: #696969;
+    color: #f7f7f7;
     font-weight: normal;
 }
 
@@ -48,29 +64,19 @@
   border-bottom: solid 2px #e6e6e6;
 }
 .dropdown-open:hover{
-  background-color: #c4c4c4;
+  background-color: #B5FFB7;
   border-bottom: solid 2px #696969;
 }
 .dropdown-open.dropdown-active{
   border-bottom: solid 2px #696969;
-  background-color: #c4c4c4;
+  background-color: #B5FFB7;
 }
 
-.rule-dropdown{
-    width: 300px;
-    background: #e6e6e6;
-    position:relative;
-    top:0;
-    bottom:0;
-    overflow-y:scroll;
+.sidebar-dropdown{
+  background: #e6e6e6;
+  position:relative;
+  top:0;
+  bottom:0;
 }
 
-.config-dropdown{
-    width: 300px;
-    background: #e6e6e6;
-    position:relative;
-    top:0;
-    bottom:0;
-    overflow-y:scroll;
-}
 

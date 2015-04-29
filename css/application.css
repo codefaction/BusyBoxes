@@ -15,9 +15,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
-#big_chris_container{
-    overflow-y:hidden;
-}
+
 .bannerButtons {
     opacity: 0.7;
 }
